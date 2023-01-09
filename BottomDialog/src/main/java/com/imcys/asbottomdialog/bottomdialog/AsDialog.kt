@@ -1,4 +1,4 @@
-package com.imcys.asbottomdialog
+package com.imcys.asbottomdialog.bottomdialog
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -17,7 +17,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.imcys.asbottomdialog.bottomdialog.inface.AsBottomSheetCallback
 import com.imcys.asbottomdialog.bottomdialog.inface.AsDialogListener
 import com.imcys.asbottomdialog.bottomdialog.base.BaseDialog
-import com.imcys.asbottomdialog.databinding.AsdialogBottomsheetBinding
+import com.imcys.asbottomdialog.bottomdialog.databinding.AsdialogBottomsheetBinding
 import com.imcys.asbottomdialog.bottomdialog.model.DialogModel
 
 /**
@@ -177,7 +177,7 @@ object AsDialog {
      * @param asBottomSheetCallback AsBottomSheetCallback
      */
     fun setBottomSheetCallback(asBottomSheetCallback: AsBottomSheetCallback) {
-        this.asBottomSheetCallback = asBottomSheetCallback
+        AsDialog.asBottomSheetCallback = asBottomSheetCallback
     }
 
     /**

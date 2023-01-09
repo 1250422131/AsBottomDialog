@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'com.github.1250422131'
-version = 'beta02'
+version = 'beta03'
 
 def properties = new Properties()
 properties.load(rootProject.file("local.properties").newInputStream())
@@ -19,9 +19,9 @@ afterEvaluate {
             // Creates a Maven publication called "release".
             release(MavenPublication) {
                 from components.release
-                groupId = '1250422131'
-                artifactId = 'com.github.1250422131'
-                version = 'beta02'
+                groupId = 'com.github.1250422131'
+                artifactId = 'AsBottomDialog'
+                version = 'beta03'
             }
         }
 

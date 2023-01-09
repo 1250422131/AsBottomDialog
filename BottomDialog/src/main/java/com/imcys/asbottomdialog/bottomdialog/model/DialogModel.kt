@@ -4,7 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.Icon
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.imcys.asbottomdialog.AsDialog
+import com.imcys.asbottomdialog.bottomdialog.AsDialog
 import com.imcys.asbottomdialog.bottomdialog.databinding.AsdialogBottomsheetBinding
 import com.imcys.asbottomdialog.bottomdialog.inface.AsDialogListener
 
