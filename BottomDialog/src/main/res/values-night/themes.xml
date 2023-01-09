@@ -1,0 +1,36 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="asdialog_Theme.BILIBILIAS" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
+        <!-- Primary brand color. -->
+
+        <item name="colorPrimary">@color/asdialog_color_primary</item>
+        <item name="colorPrimaryVariant">#E2E6FA</item>
+        <item name="colorOnPrimary">@color/asdialog_black</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/asdialog_teal_200</item>
+        <item name="colorSecondaryVariant">@color/asdialog_teal_200</item>
+        <item name="colorOnSecondary">@color/asdialog_black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" >?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="android:letterSpacing">0.05</item>
+
+
+    </style>
+
+
+    <style name="asdialog_BottomSheetDialog" parent="Theme.Material3.DayNight.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/asdialog_bottomSheetStyleWrapper</item>
+    </style>
+
+    <style name="asdialog_bottomSheetStyleWrapper" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/asdialog_dialog_bottom_sheet_bg</item>
+    </style>
+
+    <style name="asdialog_asVideoToolStyle" parent="ThemeOverlay.AppCompat.Light">
+        <item name="collapsedTitleTextColor">@color/asdialog_black</item>
+        <item name="contentScrim">@color/asdialog_color_303030</item>
+    </style>
+
+
+</resources>
