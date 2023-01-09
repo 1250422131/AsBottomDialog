@@ -18,23 +18,9 @@
 
     </style>
 
-    <style name="asdialog_Home_TabLayoutTextStyle">
-        <item name="android:textSize">20sp</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
-
-    <style name="asdialog_Theme.SplashOverlay" parent="Theme.BILIBILIAS">
-        <item name="android:windowDisablePreview">true</item>
-        <item name="android:statusBarColor">@color/asdialog_white</item>
-        <item name="android:navigationBarColor">@color/asdialog_white</item>
-        <item name="android:windowBackground">@color/asdialog_white</item>
-        <item name="android:windowLightStatusBar" tools:targetApi="23">false</item>
-        <item name="android:windowLightNavigationBar" tools:targetApi="27">false</item>
-    </style>
 
     <style name="asdialog_BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
-        <item name="bottomSheetStyle">@style/bottomSheetStyleWrapper</item>
+        <item name="bottomSheetStyle">@style/asdialog_bottomSheetStyleWrapper</item>
     </style>
 
     <style name="asdialog_bottomSheetStyleWrapper" parent="Widget.Design.BottomSheet.Modal">
@@ -47,9 +33,5 @@
     </style>
 
 
-    <style name="asdialog_Theme.BILIBILIAS.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
 
 </resources>
