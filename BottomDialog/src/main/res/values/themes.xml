@@ -4,7 +4,7 @@
         <item name="android:textColor">@color/asdialog_color_primary_light_text</item>
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/asdialog_color_primary</item>
-        <item name="colorPrimaryVariant">#E2E6FA</item>
+        <item name="colorPrimaryVariant">@color/asdialog_color_primary_variant</item>
         <item name="colorOnPrimary">@color/asdialog_white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/asdialog_teal_200</item>

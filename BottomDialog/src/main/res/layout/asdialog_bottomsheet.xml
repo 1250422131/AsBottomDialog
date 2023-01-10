@@ -45,7 +45,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textColor="@color/asdialog_color_text_hint"
+                    android:textColor="@color/asdialog_color_primary"
                     android:textStyle="bold" />
 
 
@@ -63,6 +63,7 @@
                     android:id="@+id/asdialog_bottomSheet_message"
                     android:text=""
                     android:textSize="18sp"
+                    android:textColor="@color/asdialog_black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 

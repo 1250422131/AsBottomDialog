@@ -203,6 +203,8 @@ object AsDialog {
         val bottomSheetDialog =
             BottomSheetDialog(baseDialog.context, R.style.asdialog_BottomSheetDialog)
 
+        dialogModel.bottomSheetDialog = bottomSheetDialog
+
         bottomSheetDialog.setContentView(binding.root)
 
         bottomSheetDialog.setCancelable(dialogModel.cancelable)
