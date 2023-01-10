@@ -22,6 +22,24 @@
 
 另外注意，这是测试版本，许多配置还没有加入进去，它不适合现在就参加正式项目。
 
+#### dataBinding 支持
+由于本项目采用了dataBinding，因此你也得在项目里打开。
+在app的build.gradle中
+```
+android {
+    compileOptions {
+        ....
+    }
+
+    dataBinding {
+        enabled true
+    }
+
+}
+
+```
+添加这个东西就可以啦
+
 #### settings.gradle
 
 ```
