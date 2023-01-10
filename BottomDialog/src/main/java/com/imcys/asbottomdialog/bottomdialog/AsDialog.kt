@@ -26,10 +26,10 @@ import com.imcys.asbottomdialog.bottomdialog.model.DialogModel
 object AsDialog {
 
     @SuppressLint("StaticFieldLeak")
-    lateinit var baseDialog: BaseDialog
+    private lateinit var baseDialog: BaseDialog
     private val dialogModel: DialogModel = DialogModel()
     // 默认不执行任何
-    var asBottomSheetCallback: AsBottomSheetCallback = object : AsBottomSheetCallback() {
+    private var asBottomSheetCallback: AsBottomSheetCallback = object : AsBottomSheetCallback() {
         /**
          * 底部对话框监听
          * @param bottomSheet View
@@ -176,8 +176,9 @@ object AsDialog {
      * 设置底部对话框监听
      * @param asBottomSheetCallback AsBottomSheetCallback
      */
-    fun setBottomSheetCallback(asBottomSheetCallback: AsBottomSheetCallback) {
+    fun setBottomSheetCallback(asBottomSheetCallback: AsBottomSheetCallback): AsDialog {
         AsDialog.asBottomSheetCallback = asBottomSheetCallback
+        return this
     }
 
     /**
