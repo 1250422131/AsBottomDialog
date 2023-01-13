@@ -219,7 +219,7 @@ object AsDialog {
 
         DialogBuild.apply(build).apply {
 
-            val config = Config().apply(config)
+            val config = Config().apply(config!!)
             this@AsDialog.dialogModel.title = config.title
             this@AsDialog.dialogModel.cancelable = config.cancelable
             this@AsDialog.dialogModel.content = config.content
@@ -251,8 +251,8 @@ object AsDialog {
      * 构建类
      */
     object DialogBuild {
-        var config: Config.() -> Unit = TODO("添加配置文件")
-        var asBottomSheetCallback: AsBottomSheetCallback = this.asBottomSheetCallback
+        var config: (Config.() -> Unit)? = null
+        var asBottomSheetCallback: AsBottomSheetCallback = AsDialog.asBottomSheetCallback
         var asDialogListener: ((asDialog: AsDialog) -> Unit)? = null
     }
 
