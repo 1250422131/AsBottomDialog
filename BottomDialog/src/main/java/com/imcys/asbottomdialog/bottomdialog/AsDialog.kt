@@ -4,9 +4,11 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.Icon
 import android.os.Build
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewParent
@@ -14,22 +16,31 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.imcys.asbottomdialog.bottomdialog.inface.AsBottomSheetCallback
-import com.imcys.asbottomdialog.bottomdialog.inface.AsDialogListener
+import com.imcys.asbottomdialog.bottomdialog.asdialog.config.Config
 import com.imcys.asbottomdialog.bottomdialog.base.BaseDialog
 import com.imcys.asbottomdialog.bottomdialog.databinding.AsdialogBottomsheetBinding
+import com.imcys.asbottomdialog.bottomdialog.inface.AsBottomSheetCallback
+import com.imcys.asbottomdialog.bottomdialog.inface.AsDialogListener
 import com.imcys.asbottomdialog.bottomdialog.model.DialogModel
+import com.imcys.asbottomdialog.bottomdialog.utils.FastBlurUtils
+import kotlin.math.abs
+import kotlin.math.roundToInt
+
 
 /**
  * 对话框构建类
  */
 object AsDialog {
 
+    const val DEFAULT = 0
+    const val GAUSSIAN_BLUR = 1
+
     @SuppressLint("StaticFieldLeak")
-    private lateinit var baseDialog: BaseDialog
+    lateinit var baseDialog: BaseDialog
     private val dialogModel: DialogModel = DialogModel()
+
     // 默认不执行任何
-    private var asBottomSheetCallback: AsBottomSheetCallback = object : AsBottomSheetCallback() {
+    var asBottomSheetCallback: AsBottomSheetCallback = object : AsBottomSheetCallback() {
         /**
          * 底部对话框监听
          * @param bottomSheet View
@@ -191,6 +202,60 @@ object AsDialog {
         return this
     }
 
+    fun setBackgroundStyle(style: Int): AsDialog {
+        dialogModel.backgroundStyle = style
+        return this
+    }
+
+
+    /**
+     * Lambda表达式版本构建
+     * @param build [@kotlin.ExtensionFunctionType] Function1<DialogBuild, Unit>
+     * @return BottomSheetDialog
+     */
+    fun build(
+        build: DialogBuild.() -> Unit,
+    ): BottomSheetDialog {
+
+        DialogBuild.apply(build).apply {
+
+            val config = Config().apply(config)
+            this@AsDialog.dialogModel.title = config.title
+            this@AsDialog.dialogModel.cancelable = config.cancelable
+            this@AsDialog.dialogModel.content = config.content
+            this@AsDialog.dialogModel.imageIcon = config.imageIcon
+            this@AsDialog.dialogModel.imageDrawable = config.imageDrawable
+            this@AsDialog.dialogModel.imageBitmap = config.imageBitmap
+            this@AsDialog.dialogModel.positiveButton = config.positiveButton
+            this@AsDialog.dialogModel.positiveButtonText = config.positiveButtonText
+            this@AsDialog.dialogModel.negativeButton = config.negativeButton
+            this@AsDialog.dialogModel.negativeButtonText = config.negativeButtonText
+
+
+            this@AsDialog.asBottomSheetCallback = AsDialog.asBottomSheetCallback
+            dialogModel.asDialogListener = object : AsDialogListener{
+                override fun onClose(asDialog: AsDialog) {
+                    asDialogListener?.let { it(asDialog) }
+                }
+
+            }
+            return this@AsDialog.build()
+
+        }
+
+
+    }
+
+
+    /**
+     * 构建类
+     */
+    object DialogBuild {
+        var config: Config.() -> Unit = TODO("添加配置文件")
+        var asBottomSheetCallback: AsBottomSheetCallback = this.asBottomSheetCallback
+        var asDialogListener: ((asDialog: AsDialog) -> Unit)? = null
+    }
+
 
     /**
      * 构建对话框
@@ -209,6 +274,17 @@ object AsDialog {
         bottomSheetDialog.setContentView(binding.root)
 
         bottomSheetDialog.setCancelable(dialogModel.cancelable)
+
+        when (dialogModel.backgroundStyle) {
+            //上高斯模糊
+            GAUSSIAN_BLUR -> {
+                dialogModel.blurBackgroundDrawers =
+                    FastBlurUtils.getBlurBackgroundDrawer(baseDialog.context as Activity)
+                dialogModel.bottomSheetDialog.window?.setBackgroundDrawable(BitmapDrawable(
+                    baseDialog.context.resources,
+                    dialogModel.blurBackgroundDrawers[4]))
+            }
+        }
 
         initDialogBehaviorBinding(binding.asdialogBottomSheetBar,
             baseDialog.context,
@@ -304,15 +380,65 @@ object AsDialog {
                             dialogModel.asDialogListener?.onClose(this@AsDialog)
                         }
                     }
+
+                    this@AsDialog.onStateChanged(bottomSheet, newState)
+
                 }
 
             }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
+
                 asBottomSheetCallback.onSlide(bottomSheet, slideOffset)
+                this@AsDialog.onSlide(bottomSheet, slideOffset)
+
             }
 
         })
+    }
+
+    private fun onSlide(bottomSheet: View, slideOffset: Float) {
+        if (dialogModel.blurBackgroundDrawers.isNotEmpty()) {
+            when (abs(slideOffset * 100).roundToInt()) {
+                in 0..20 -> {
+                    dialogModel.bottomSheetDialog.window?.setBackgroundDrawable(BitmapDrawable(
+                        baseDialog.context.resources,
+                        dialogModel.blurBackgroundDrawers[4]))
+                }
+
+                in 20..40 -> {
+                    dialogModel.bottomSheetDialog.window?.setBackgroundDrawable(BitmapDrawable(
+                        baseDialog.context.resources,
+                        dialogModel.blurBackgroundDrawers[3]))
+                }
+
+                in 40..60 -> {
+                    dialogModel.bottomSheetDialog.window?.setBackgroundDrawable(BitmapDrawable(
+                        baseDialog.context.resources,
+                        dialogModel.blurBackgroundDrawers[2]))
+                }
+
+                in 60..80 -> {
+                    dialogModel.bottomSheetDialog.window?.setBackgroundDrawable(BitmapDrawable(
+                        baseDialog.context.resources,
+                        dialogModel.blurBackgroundDrawers[1]))
+                }
+
+                in 80..100 -> {
+                    dialogModel.bottomSheetDialog.window?.setBackgroundDrawable(BitmapDrawable(
+                        baseDialog.context.resources,
+                        dialogModel.blurBackgroundDrawers[0]))
+                }
+            }
+        }
+    }
+
+    private fun onStateChanged(bottomSheet: View, newState: Int) {
+        if (dialogModel.backgroundStyle == GAUSSIAN_BLUR) {
+            if (newState == BottomSheetBehavior.STATE_HIDDEN) {
+                dialogModel.bottomSheetDialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+            }
+        }
     }
 
 

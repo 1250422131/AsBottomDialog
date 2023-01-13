@@ -14,7 +14,7 @@
 
 **AsBottomDialog**是一款纯Kotlin打造的安卓底部对话框（BottomSheetDialog），
 此模块是在 [BILIBILIAS](https://github.com/1250422131/bilibilias) 中抽离单独维护的对话框库。
-无论是在fragment还是在activity，都可以唤出使用。
+无论是在fragment还是在activity，都可以唤出使用，并且**AsBottomDialog**还在尝试支持更多的Lambda写法，更清晰的去表达代码。
 
 ### 引入
 
@@ -76,7 +76,28 @@ dependencies {
 #### kotlin使用
 
 AsBottomDialog在kotlin的使用中会更加方便，这是由于其本身采用kotlin开发。
+我们支持了Lambda表达式，使你方便的去构建，这样的写法更加清晰。
+```kotlin
+        AsDialog.init(this)
+            .build {
+                config = {
+                    title = "测试"
+                    content = "好嘞"
+                    positiveButtonText = "是"
+                    positiveButton = {
+                        it.cancel()
+                    }
+                }
+                
+                asDialogListener = {
+                    
+                }
+                
 
+            }
+            .show()
+```
+当然，你也可以选择更加熟悉的链式调用
 ```kotlin
  AsDialog.init(this)
     .setTitle("测试")

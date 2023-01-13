@@ -10,6 +10,8 @@ import com.imcys.asbottomdialog.bottomdialog.inface.AsDialogListener
 
 class DialogModel {
 
+
+
     var title: String = "标题"
     var content: String? = null
     var imageDrawable: Drawable? = null
@@ -23,6 +25,11 @@ class DialogModel {
     var negativeButton: ((AsDialog) -> Unit)? = null
     var asDialogListener: AsDialogListener? = null
     var cancelable: Boolean = true
+    var backgroundStyle = AsDialog.DEFAULT
     lateinit var bottomSheetDialog: BottomSheetDialog
     lateinit var asDialogBottomsheetBinding: AsdialogBottomsheetBinding
+
+    var blurBackgroundDrawers : MutableList<Bitmap> = mutableListOf()
+
+
 }
