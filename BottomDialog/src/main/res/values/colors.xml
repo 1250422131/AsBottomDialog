@@ -9,7 +9,7 @@
 
     <color name="asdialog_teal_200">#ffd2e0</color>
     <color name="asdialog_teal_700">#fb7299</color>
-    <color name="asdialog_black">#FF000000</color>
+    <color name="asdialog_black">#000000</color>
     <color name="asdialog_white">#FFFFFFFF</color>
     <color name="asdialog_color_text_hint">#A6A6AD</color>
     <color name="asdialog_olor_121212">#FFFFFF</color>

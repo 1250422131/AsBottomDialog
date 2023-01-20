@@ -175,6 +175,17 @@ object AsDialog {
     }
 
     /**
+     * 设置中立按钮
+     * @param title String
+     * @param asDialog Function1<AsDialog, Unit>
+     */
+    fun setNeutralButton(title: String, asDialog: (AsDialog) -> Unit): AsDialog {
+        dialogModel.neutralButton = asDialog
+        dialogModel.neutralButtonText = title
+        return this
+    }
+
+    /**
      * 设置事件监听器
      * @param asDialogListener AsDialogListener
      */
@@ -230,7 +241,8 @@ object AsDialog {
             this@AsDialog.dialogModel.positiveButtonText = config.positiveButtonText
             this@AsDialog.dialogModel.negativeButton = config.negativeButton
             this@AsDialog.dialogModel.negativeButtonText = config.negativeButtonText
-
+            this@AsDialog.dialogModel.neutralButton = config.neutralButton
+            this@AsDialog.dialogModel.neutralButtonText = config.neutralButtonText
 
             this@AsDialog.asBottomSheetCallback = AsDialog.asBottomSheetCallback
             dialogModel.asDialogListener = object : AsDialogListener{
@@ -307,6 +319,12 @@ object AsDialog {
                 }
             }
 
+            dialogModel.neutralButton?.let { it1 ->
+                asdialogBottomSheetNeutralButton.setOnClickListener {
+                    it1(this@AsDialog)
+                }
+            }
+
             //设置按钮文字
             dialogModel.positiveButtonText?.let {
                 asdialogBottomSheetPositiveButton.text = it
@@ -316,6 +334,11 @@ object AsDialog {
             dialogModel.negativeButtonText?.let {
                 asdialogBottomSheetNegativeButton.text = it
                 asdialogBottomSheetNegativeButton.visibility = View.VISIBLE
+            }
+
+            dialogModel.neutralButtonText?.let {
+                asdialogBottomSheetNeutralButton.text = it
+                asdialogBottomSheetNeutralButton.visibility = View.VISIBLE
             }
 
             dialogModel.imageDrawable?.let {

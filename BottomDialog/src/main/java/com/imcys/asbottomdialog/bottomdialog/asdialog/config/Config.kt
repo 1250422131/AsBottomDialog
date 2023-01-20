@@ -15,7 +15,10 @@ class Config {
     var cancelable: Boolean = true
     var positiveButtonText :String? = null
     var negativeButtonText :String? = null
+    var neutralButtonText :String? = null
+    var neutralButton :((AsDialog) -> Unit)? = null
     var positiveButton:((AsDialog) -> Unit)? = null
     var negativeButton: ((AsDialog) -> Unit)? = null
+
 
 }

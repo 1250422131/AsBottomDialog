@@ -6,7 +6,7 @@
     <color name="asdialog_color_primary_light_text">#05080c</color>
     <color name="asdialog_teal_200">#ffd2e0</color>
     <color name="asdialog_teal_700">#fb7299</color>
-    <color name="asdialog_basdialog_lack" tools:ignore="MissingDefaultResource">#FFFFFFFF</color>
+    <color name="asdialog_black" tools:ignore="MissingDefaultResource">#FFFFFFFF</color>
     <color name="asdialog_white">#000000</color>
     <color name="asdialog_color_text_hint">#A6A6AD</color>
     <color name="asdialog_color_121212" tools:ignore="MissingDefaultResource">#121212</color>

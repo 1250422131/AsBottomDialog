@@ -107,6 +107,29 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="0dp">
+
+                <Button
+                    android:visibility="gone"
+                    android:id="@+id/asdialog_bottomSheet_neutralButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@color/asdialog_color_primary_variant"
+                    android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                    android:text=""
+                    android:textColor="@color/asdialog_black"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
                 android:layout_marginBottom="25dp"
                 app:cardCornerRadius="15dp"
                 app:cardElevation="0dp">
